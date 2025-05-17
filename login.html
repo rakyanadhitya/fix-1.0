@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Delivery Service</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Login</h1>
+    </header>
+    <main>
+        <div class="login-container">
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-role">Role:</label>
+                    <select id="login-role" required>
+                        <option value="">Select Role</option>
+                        <option value="user">User</option>
+                        <option value="courier">Courier</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="login-id">ID:</label>
+                    <input type="text" id="login-id" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Delivery Service. All rights reserved.</p>
+    </footer>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

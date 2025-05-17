@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courier Dashboard - Delivery Service</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Courier Dashboard</h1>
+        <button id="logout-btn" class="btn">Logout</button>
+    </header>
+    <main>
+        <div class="dashboard-container">
+            <div class="courier-info">
+                <h2>Your Information</h2>
+                <div id="courier-details">
+                    <!-- Courier details will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="courier-actions">
+                <h2>Actions</h2>
+                <button id="view-active-orders-btn" class="btn">View Active Orders</button>
+            </div>
+            
+            <!-- Active Orders Modal -->
+            <div id="active-orders-modal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Active Orders</h2>
+                    <div id="active-orders-list">
+                        <!-- Active orders will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Details Modal -->
+            <div id="order-details-modal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Order Details</h2>
+                    <div id="order-details-content">
+                        <!-- Order details will be populated by JavaScript -->
+                    </div>
+                    <button id="complete-order-btn" class="btn">Mark as Delivered</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Delivery Service. All rights reserved.</p>
+    </footer>
+    <script src="js/auth.js"></script>
+    <script src="js/courier.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

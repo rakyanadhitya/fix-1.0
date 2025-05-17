@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Delivery Service</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>User Dashboard</h1>
+        <button id="logout-btn" class="btn">Logout</button>
+    </header>
+    <main>
+        <div class="dashboard-container">
+            <div class="user-info">
+                <h2>Your Information</h2>
+                <div id="user-details">
+                    <!-- User details will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="user-actions">
+                <h2>Actions</h2>
+                <button id="new-order-btn" class="btn">Make New Order</button>
+                <button id="view-orders-btn" class="btn">View Order Status</button>
+            </div>
+            
+            <!-- New Order Modal -->
+            <div id="order-modal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Make New Order</h2>
+                    <div class="products-grid">
+                        <!-- Products will be dynamically inserted here -->
+                    </div>
+                    <button id="confirm-order-btn" class="btn" disabled>Confirm Order</button>
+                </div>
+            </div>
+            
+            <!-- Order Status Modal -->
+            <div id="orders-modal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Your Orders</h2>
+                    <div id="orders-list">
+                        <!-- Orders will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Delivery Service. All rights reserved.</p>
+    </footer>
+    <script src="js/auth.js"></script>
+    <script src="js/user.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Delivery Service</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Register</h1>
+    </header>
+    <main>
+        <div class="registration-container">
+            <div class="role-selection">
+                <button id="user-btn" class="btn active">Register as User</button>
+                <button id="courier-btn" class="btn">Register as Courier</button>
+            </div>
+            
+            <!-- User Registration Form -->
+            <form id="user-form" class="registration-form">
+                <h2>User Registration</h2>
+                <div class="form-group">
+                    <label for="user-fullname">Full Name:</label>
+                    <input type="text" id="user-fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-gender">Gender:</label>
+                    <select id="user-gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="user-address">Address:</label>
+                    <textarea id="user-address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="user-birthdate">Birth Date:</label>
+                    <input type="date" id="user-birthdate" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-password">Password:</label>
+                    <input type="password" id="user-password" required>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+            
+            <!-- Courier Registration Form -->
+            <form id="courier-form" class="registration-form hidden">
+                <h2>Courier Registration</h2>
+                <div class="form-group">
+                    <label for="courier-fullname">Full Name:</label>
+                    <input type="text" id="courier-fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="courier-gender">Gender:</label>
+                    <select id="courier-gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="courier-birthdate">Birth Date:</label>
+                    <input type="date" id="courier-birthdate" required>
+                </div>
+                <div class="form-group">
+                    <label for="courier-password">Password:</label>
+                    <input type="password" id="courier-password" required>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+            
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Delivery Service. All rights reserved.</p>
+    </footer>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
