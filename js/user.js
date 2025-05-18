@@ -110,25 +110,54 @@ document.addEventListener('DOMContentLoaded', function() {
                 {'product_id': '87', 'product_name': 'Daging sapi muda', 'price': 398}
             ];
             
-            const productsGrid = document.querySelector('.products-grid');
-            productsGrid.innerHTML = '';
-            
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.dataset.id = product.product_id;
-                productCard.innerHTML = `
-                    <h3>${product.product_name}</h3>
-                    <p>Price: $${product.price}</p>
-                `;
-                
-                productCard.addEventListener('click', function() {
-                    this.classList.toggle('selected');
-                    updateConfirmButton();
+                const productsGrid = document.querySelector('.products-grid');
+                productsGrid.innerHTML = '';
+
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.dataset.id = product.product_id;
+                    productCard.innerHTML = `
+                        <h3>${product.product_name}</h3>
+                        <p>Price: $${product.price}</p>
+                        <div class="quantity-controls" style="display: none;">
+                            <button class="quantity-minus">-</button>
+                            <span class="quantity">1</span>
+                            <button class="quantity-plus">+</button>
+                        </div>
+                    `;
+                    
+                    // Show quantity controls when product is selected
+                    productCard.addEventListener('click', function() {
+                        this.classList.toggle('selected');
+                        const quantityControls = this.querySelector('.quantity-controls');
+                        quantityControls.style.display = this.classList.contains('selected') ? 'block' : 'none';
+                        updateConfirmButton();
+                    });
+                    
+                    // Quantity adjustment buttons
+                    const minusBtn = productCard.querySelector('.quantity-minus');
+                    const plusBtn = productCard.querySelector('.quantity-plus');
+                    const quantityDisplay = productCard.querySelector('.quantity');
+                    
+                    minusBtn.addEventListener('click', function(e) {
+                        e.stopPropagation(); // Prevent triggering the card click event
+                        let currentQty = parseInt(quantityDisplay.textContent);
+                        if (currentQty > 1) {
+                            quantityDisplay.textContent = currentQty - 1;
+                            updateConfirmButton();
+                        }
+                    });
+                    
+                    plusBtn.addEventListener('click', function(e) {
+                        e.stopPropagation(); // Prevent triggering the card click event
+                        let currentQty = parseInt(quantityDisplay.textContent);
+                        quantityDisplay.textContent = currentQty + 1;
+                        updateConfirmButton();
+                    });
+                    
+                    productsGrid.appendChild(productCard);
                 });
-                
-                productsGrid.appendChild(productCard);
-            });
         });
     }
     
@@ -290,12 +319,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 status: 'pending',
                 products: selectedProducts.map(card => {
                     const productId = card.dataset.id;
-                    return products.find(p => p.product_id === productId);
+                    const quantity = parseInt(card.querySelector('.quantity').textContent);
+                    const product = products.find(p => p.product_id === productId);
+                    return {
+                        ...product, // Include all product properties
+                        quantity: quantity // Add quantity to the product
+                    };
                 }),
                 total: selectedProducts.reduce((sum, card) => {
                     const productId = card.dataset.id;
+                    const quantity = parseInt(card.querySelector('.quantity').textContent);
                     const product = products.find(p => p.product_id === productId);
-                    return sum + product.price;
+                    return sum + (product.price * quantity); // Multiply price by quantity
                 }, 0)
             };
             
@@ -307,9 +342,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    function updateConfirmButton() {
-        const selectedProducts = document.querySelectorAll('.product-card.selected');
-        const confirmOrderBtn = document.getElementById('confirm-order-btn');
-        confirmOrderBtn.disabled = selectedProducts.length === 0;
-    }
+function updateConfirmButton() {
+    const selectedProducts = document.querySelectorAll('.product-card.selected');
+    let totalItems = 0;
+    
+    selectedProducts.forEach(card => {
+        const quantity = parseInt(card.querySelector('.quantity').textContent);
+        totalItems += quantity;
+    });
+    const confirmOrderBtn = document.getElementById('confirm-order-btn');
+    confirmOrderBtn.disabled = totalItems === 0;
+}
+
 });

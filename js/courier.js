@@ -51,36 +51,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    function showOrderDetails(orderId) {
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        const order = orders.find(o => o.orderId === parseInt(orderId));
-        
-        if (!order) return;
-        
-        const detailsModal = document.getElementById('order-details-modal');
-        const detailsContent = document.getElementById('order-details-content');
-        
-        detailsContent.innerHTML = `
-            <p><strong>Order ID:</strong> ${order.orderId}</p>
-            <p><strong>Customer:</strong> ${order.userName}</p>
-            <p><strong>Date:</strong> ${order.date}</p>
-            <p><strong>Status:</strong> <span class="order-status ${order.status === 'delivered' ? 'status-delivered' : 'status-pending'}">${order.status}</span></p>
-            <p><strong>Total:</strong> $${order.total}</p>
-            <h3>Products:</h3>
-            <ul>
-                ${order.products.map(p => `<li>${p.product_name} - $${p.price} x ${p.quantity} = $${p.price * p.quantity}</li>`).join('')}
-            </ul>
-        `;
-        
-        const completeBtn = document.getElementById('complete-order-btn');
-        completeBtn.onclick = function() {
-            order.status = 'delivered';
-            localStorage.setItem('orders', JSON.stringify(orders));
-            detailsModal.classList.add('hidden');
-            document.getElementById('active-orders-modal').classList.add('hidden');
-            alert('Order marked as delivered!');
-        };
-        
-        detailsModal.classList.remove('hidden');
-    }
+function showOrderDetails(orderId) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const order = orders.find(o => o.orderId === parseInt(orderId));
+    
+    if (!order) return;
+    
+    const detailsModal = document.getElementById('order-details-modal');
+    const detailsContent = document.getElementById('order-details-content');
+    
+    detailsContent.innerHTML = `
+        <p><strong>Order ID:</strong> ${order.orderId}</p>
+        <p><strong>Customer:</strong> ${order.userName}</p>
+        <p><strong>Date:</strong> ${order.date}</p>
+        <p><strong>Status:</strong> <span class="order-status ${order.status === 'delivered' ? 'status-delivered' : 'status-pending'}">${order.status}</span></p>
+        <p><strong>Total:</strong> $${order.total}</p>
+        <h3>Products:</h3>
+        <ul>
+            ${order.products.map(p => `
+                <li>
+                    ${p.product_name} - $${p.price} x ${p.quantity} = $${(p.price * p.quantity).toFixed(2)}
+                </li>
+            `).join('')}
+        </ul>
+    `;
+    
+    const completeBtn = document.getElementById('complete-order-btn');
+    completeBtn.onclick = function() {
+        order.status = 'delivered';
+        localStorage.setItem('orders', JSON.stringify(orders));
+        detailsModal.classList.add('hidden');
+        document.getElementById('active-orders-modal').classList.add('hidden');
+        alert('Order marked as delivered!');
+    };
+    
+    detailsModal.classList.remove('hidden');
+}
 });
